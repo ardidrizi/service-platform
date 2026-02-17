@@ -1,0 +1,10 @@
+<h1><%= @service.title %></h1>
+
+<p><strong>Description:</strong> <%= @service.description.presence || "No description provided." %></p>
+<p><strong>Price:</strong> <%= number_to_currency(@service.price) %></p>
+<p><strong>Owner:</strong> <%= @service.user.email %></p>
+
+<div>
+  <%= link_to "Edit", edit_service_path(@service) %> |
+  <%= link_to "Back to Services", services_path %>
+</div>

@@ -1,0 +1,25 @@
+<h1>Bookings</h1>
+
+<p>
+  <%= link_to "New Booking", new_booking_path %>
+</p>
+
+<section>
+  <% if @bookings.any? %>
+    <ul>
+      <% @bookings.each do |booking| %>
+        <li>
+          <strong><%= link_to "Booking ##{booking.id}", booking %></strong>
+          for <%= booking.service&.title || "Unknown service" %> (<%= booking.status&.humanize || "unknown" %>)
+          by <%= booking.user&.email || "Unknown user" %>
+          <div>
+            <%= link_to "Edit", edit_booking_path(booking) %> |
+            <%= link_to "Destroy", booking, method: :delete, data: { confirm: "Remove booking?", turbo_method: :delete } %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No bookings yet.</p>
+  <% end %>
+</section>

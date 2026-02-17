@@ -1,0 +1,26 @@
+<%= form_with(model: booking, local: true) do |form| %>
+  <% if booking.errors.any? %>
+    <div>
+      <h2><%= pluralize(booking.errors.count, "error") %> prevented this booking from saving:</h2>
+      <ul>
+        <% booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :service_id, "Service" %><br>
+    <%= form.collection_select :service_id, Service.all, :id, :title, prompt: "Select a service" %>
+  </div>
+
+  <div>
+    <%= form.label :status %><br>
+    <%= form.select :status, Booking.statuses.keys.map { |status| [status.humanize, status] } %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
