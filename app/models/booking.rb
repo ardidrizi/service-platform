@@ -6,4 +6,13 @@ class Booking < ApplicationRecord
 
   validates :user, presence: true
   validates :service, presence: true
+  validate :service_cannot_be_owned_by_user
+
+  private
+
+  def service_cannot_be_owned_by_user
+    return unless user && service && service.user == user
+
+    errors.add(:base, "You cannot book your own service")
+  end
 end

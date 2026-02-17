@@ -25,6 +25,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to @booking, notice: "Booking created."
     else
+      flash.now[:alert] = @booking.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end
